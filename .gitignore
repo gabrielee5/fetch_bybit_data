@@ -1,0 +1,4 @@
+venv
+.env
+data/
+fetching_data.log
