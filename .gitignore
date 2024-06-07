@@ -2,3 +2,4 @@ venv
 .env
 data/
 fetching_data.log
+.DS_Store
