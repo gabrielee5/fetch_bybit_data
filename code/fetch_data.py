@@ -122,7 +122,7 @@ interval = 60  # 1-hour interval in minutes
 # end_time = int(time.time() * 1000)  # Current time in milliseconds
 # start_time = end_time - months * 30 * 86400000  # 6 months ago in milliseconds
 start_date = '2024-01-01'
-end_date = '2024-05-15'
+end_date = '2024-10-08'
 
 if __name__ ==  '__main__':
 
