@@ -41,5 +41,5 @@ def concat_data(directory_path="/Users/gabrielefabietti/projects/fetch_data/data
     return data
 
 if __name__ ==  '__main__':
-    spec_path = 'SOLUSDT_perp_1h'
+    spec_path = 'ETHUSDT_perp_5m'
     data = concat_data(specific_path=spec_path)

@@ -109,7 +109,7 @@ def main(symbol, start_date, end_date, interval=60):
         # Save to CSV in a separate folder with versioning
         output_folder = "data"
         os.makedirs(output_folder, exist_ok=True)  # Create the folder if it doesn't exist
-        output_file = save_with_versioning(data, output_folder, f"{symbol}_perp_1h_{start_date}_to_{end_date}") # change to the correct timeframe if needed
+        output_file = save_with_versioning(data, output_folder, f"{symbol}_perp_{interval}m_{start_date}_to_{end_date}") # change to the correct timeframe if needed
         
         logging.info(f"Data saved to {output_file}")
     else:
@@ -117,13 +117,16 @@ def main(symbol, start_date, end_date, interval=60):
 
 
 # Parameters
-symbol = "SOLUSDT"
-interval = 60  # 1-hour interval in minutes
+symbol = "ETHUSDT"
+interval = 5  # 1-hour interval in minutes
 # end_time = int(time.time() * 1000)  # Current time in milliseconds
 # start_time = end_time - months * 30 * 86400000  # 6 months ago in milliseconds
-start_date = '2024-01-01'
-end_date = '2024-10-08'
+start_date = '2024-07-15'
+end_date = '2024-09-15'
 
 if __name__ ==  '__main__':
 
     main(symbol, start_date, end_date, interval)
+
+# WARNING 
+# IT WAY NOT FUNCTION AS EXPECTED

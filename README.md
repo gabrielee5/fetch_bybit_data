@@ -11,3 +11,7 @@ It may be possible to download other bybit data using this template by changing 
 ## Concatenate files
 
 the manage_data.py file is used to concatenate the downloaded file in a single file considering that they may have been downloaded in tranches.
+
+# WARNING
+
+When fetching ifve minutes data using the file fetch_data I got bad data. Needs revision. Or maybe the problem is in the manage_data... I don't know yet.

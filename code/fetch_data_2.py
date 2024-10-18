@@ -1,0 +1,115 @@
+from pybit.unified_trading import HTTP
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import datetime as dt
+import time 
+import json
+from dotenv import dotenv_values
+import os
+
+# Load environment variables from .env file
+secrets = dotenv_values(".env")
+api_key = secrets["api_key"]
+api_secret = secrets["api_secret"]
+
+# Initialize the session
+session = HTTP(
+    api_key=api_key, 
+    api_secret=api_secret
+)
+
+def format_data(response):
+    '''
+    Parameters
+    ----------
+    respone : dict
+        response from calling get_klines() method from pybit.
+
+    Returns
+    -------
+    dataframe of ohlc data with date as index
+
+    '''
+    data = response.get('list', None)
+    
+    if not data:
+        return 
+    
+    data = pd.DataFrame(data,
+                        columns =[
+                            'timestamp',
+                            'open',
+                            'high',
+                            'low',
+                            'close',
+                            'volume',
+                            'turnover'
+                            ],
+                        )
+    
+    f = lambda x: dt.datetime.utcfromtimestamp(int(x)/1000)
+    data.index = data.timestamp.apply(f)
+    return data[::-1].apply(pd.to_numeric)
+
+def get_last_timestamp(df):
+    return int(df.timestamp[-1:].values[0])
+
+def save_dataframe_to_csv(df, filename):
+    """
+    Save the given DataFrame as a CSV file in a folder called 'data'.
+    
+    Parameters:
+    -----------
+    df : pandas.DataFrame
+        The DataFrame to be saved
+    filename : str
+        The name of the file (without .csv extension)
+    
+    Returns:
+    --------
+    None
+    """
+    # Create the 'data' folder if it doesn't exist
+    if not os.path.exists('data2'):
+        os.makedirs('data2')
+    
+    # Construct the full file path
+    file_path = os.path.join('data2', f"{filename}.csv")
+    
+    # Save the DataFrame as CSV
+    df.to_csv(file_path, index=True)
+    print(f"DataFrame saved to {file_path}")
+
+if __name__ == '__main__':
+
+    start = int(dt.datetime(2024, 4, 17).timestamp()* 1000)
+
+    interval = 5
+    symbol = 'ETHUSDT'
+    df = pd.DataFrame()
+
+    while True:
+        response = session.get_kline(category='linear', 
+                                    symbol=symbol, 
+                                    start=start,
+                                    interval=interval).get('result')
+        
+        latest = format_data(response)
+        
+        if not isinstance(latest, pd.DataFrame):
+            break
+        
+        start = get_last_timestamp(latest)
+        
+        time.sleep(0.1)
+        
+        df = pd.concat([df, latest])
+        print(f'Collecting data starting {dt.datetime.fromtimestamp(start/1000)}')
+        if len(latest) == 1: break
+
+
+    df.drop_duplicates(subset=['timestamp'], keep='last', inplace=True)
+
+    # Save the DataFrame to a CSV file
+    save_dataframe_to_csv(df, f"{symbol}_{interval}_data")

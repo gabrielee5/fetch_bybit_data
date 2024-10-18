@@ -3,3 +3,4 @@ venv
 data/
 fetching_data.log
 .DS_Store
+data2/
