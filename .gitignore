@@ -5,6 +5,7 @@ fetching_data.log
 .DS_Store
 data2/
 .ipynb_checkpoints/work_on_data-checkpoint.ipynb
+.ipynb_checkpoints.ipynb_checkpoints
 handle_data/ADAUSDT_60_data.csv
 handle_data/BTCUSDT_60_data.csv
 handle_data/DOGEUSDT_60_data.csv
