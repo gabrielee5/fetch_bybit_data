@@ -48,8 +48,7 @@ def format_data(response):
                             ],
                         )
     
-    f = lambda x: dt.datetime.utcfromtimestamp(int(x)/1000)
-    data.index = data.timestamp.apply(f)
+    f = lambda x: dt.datetime.fromtimestamp(int(x)/1000, dt.UTC)
     return data[::-1].apply(pd.to_numeric)
 
 def get_last_timestamp(df):
@@ -83,10 +82,10 @@ def save_dataframe_to_csv(df, filename):
 
 if __name__ == '__main__':
 
-    start = int(dt.datetime(2024, 4, 17).timestamp()* 1000)
+    start = int(dt.datetime(2020, 11, 5).timestamp()* 1000)
 
-    interval = 5
-    symbol = 'ETHUSDT'
+    interval = '60' # 1,3,5,15,30,60,120,240,360,720,D,M,W
+    symbol = 'ADAUSDT'
     df = pd.DataFrame()
 
     while True:
