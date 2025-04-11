@@ -54,9 +54,9 @@ def format_data(response):
 def get_last_timestamp(df):
     return int(df.timestamp[-1:].values[0])
 
-def save_dataframe_to_csv(df, filename):
+def save_dataframe_to_csv(df, filename, folder_name='data_n'):
     """
-    Save the given DataFrame as a CSV file in a folder called 'data'.
+    Save the given DataFrame as a CSV file in a subfolder of the main 'data' directory.
     
     Parameters:
     -----------
@@ -64,29 +64,37 @@ def save_dataframe_to_csv(df, filename):
         The DataFrame to be saved
     filename : str
         The name of the file (without .csv extension)
+    folder_name : str, default='data_n'
+        The name of the subfolder within the 'data' directory
     
     Returns:
     --------
     None
     """
-    # Create the 'data' folder if it doesn't exist
-    if not os.path.exists('data2'):
-        os.makedirs('data2')
+    # Create the main 'data' folder if it doesn't exist
+    if not os.path.exists('data'):
+        os.makedirs('data')
+    
+    # Create the subfolder inside 'data' if it doesn't exist
+    subfolder_path = os.path.join('data', folder_name)
+    if not os.path.exists(subfolder_path):
+        os.makedirs(subfolder_path)
     
     # Construct the full file path
-    file_path = os.path.join('data2', f"{filename}.csv")
+    file_path = os.path.join('data', folder_name, f"{filename}.csv")
     
     # Save the DataFrame as CSV
-    df.to_csv(file_path, index=True)
+    df.to_csv(file_path, index=False)
     print(f"DataFrame saved to {file_path}")
 
 if __name__ == '__main__':
 
-    start = int(dt.datetime(2020, 11, 5).timestamp()* 1000)
+    start = int(dt.datetime(2024, 1, 1).timestamp()* 1000)
 
-    interval = '60' # 1,3,5,15,30,60,120,240,360,720,D,M,W
-    symbol = 'ADAUSDT'
+    interval = '5' # 1,3,5,15,30,60,120,240,360,720,D,M,W
+    symbol = 'BTCUSDT'
     df = pd.DataFrame()
+    folder_name = 'data4'
 
     while True:
         response = session.get_kline(category='linear', 
@@ -111,4 +119,4 @@ if __name__ == '__main__':
     df.drop_duplicates(subset=['timestamp'], keep='last', inplace=True)
 
     # Save the DataFrame to a CSV file
-    save_dataframe_to_csv(df, f"{symbol}_{interval}_data")
+    save_dataframe_to_csv(df, f"{symbol}_{interval}_data", folder_name)
