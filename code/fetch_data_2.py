@@ -89,10 +89,10 @@ def save_dataframe_to_csv(df, filename, folder_name='data_n'):
 
 if __name__ == '__main__':
 
-    start = int(dt.datetime(2024, 1, 1).timestamp()* 1000)
+    start = int(dt.datetime(2021, 1, 1).timestamp()* 1000)
 
-    interval = '5' # 1,3,5,15,30,60,120,240,360,720,D,M,W
-    symbol = 'BTCUSDT'
+    interval = '60' # 1,3,5,15,30,60,120,240,360,720,D,M,W
+    symbol = 'SOLUSDT'
     df = pd.DataFrame()
     folder_name = 'data4'
 
