@@ -88,12 +88,17 @@ def save_dataframe_to_csv(df, filename, folder_name='data_n'):
     print(f"DataFrame saved to {file_path}")
 
 if __name__ == '__main__':
+
     start_date = dt.datetime(2023, 1, 1)
-    end_date = dt.datetime(2024, 1, 1)
+    end_date = dt.datetime(2025, 1, 1)
     
-    symbols = ['ETHUSDT', 'BTCUSDT', 'SOLUSDT']
-    interval = '5' # 1,3,5,15,30,60,120,240,360,720,D,M,W
-    folder_name = '2023_data'
+    # Set date_range to True to collect data until the end date
+    # Set date_range to False if you want to collect data until the latest available
+    date_range = True
+    
+    symbols = ['SHIB1000USDT', 'FILUSDT', 'ETCUSDT', 'XLMUSDT', 'AAVEUSDT', 'MANAUSDT', 'SANDUSDT', 'FTMUSDT', 'ALGOUSDT', 'ICPUSDT', 'HNTUSDT', 'ZILUSDT', 'CHZUSDT', 'WAVESUSDT', 'CRVUSDT', 'LDOUSDT']
+    interval = '60' # 1,3,5,15,30,60,120,240,360,720,D,M,W
+    folder_name = '20-24_data'
 
     for symbol in symbols:
         print(f"\nProcessing {symbol}...")
@@ -123,10 +128,11 @@ if __name__ == '__main__':
             df = pd.concat([df, latest])
             print(f'Collecting {symbol} data starting {dt.datetime.fromtimestamp(start/1000)}')
             
-            # Check if we've reached the end date
-            if start >= end:
-                print(f"Reached end date: {dt.datetime.fromtimestamp(end/1000)}")
-                break
+            if date_range:
+                # Check if we've reached the end date
+                if start >= end:
+                    print(f"Reached end date: {dt.datetime.fromtimestamp(end/1000)}")
+                    break
                 
             if len(latest) == 1: 
                 break
