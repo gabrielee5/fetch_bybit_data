@@ -90,15 +90,15 @@ def save_dataframe_to_csv(df, filename, folder_name='data_n'):
 if __name__ == '__main__':
 
     start_date = dt.datetime(2023, 1, 1)
-    end_date = dt.datetime(2025, 1, 1)
+    end_date = dt.datetime(2024, 1, 1)
     
     # Set date_range to True to collect data until the end date
     # Set date_range to False if you want to collect data until the latest available
     date_range = True
     
-    symbols = ['SHIB1000USDT', 'FILUSDT', 'ETCUSDT', 'XLMUSDT', 'AAVEUSDT', 'MANAUSDT', 'SANDUSDT', 'FTMUSDT', 'ALGOUSDT', 'ICPUSDT', 'HNTUSDT', 'ZILUSDT', 'CHZUSDT', 'WAVESUSDT', 'CRVUSDT', 'LDOUSDT']
+    symbols = ['ETHUSDT', 'BTCUSDT', 'SOLUSDT', 'XRPUSDT', '1000PEPEUSDT', 'SUIUSDT', 'DOGEUSDT', 'MOODENGUSDT', 'TRUMPUSDT', 'FARTCOINUSDT', 'WIFUSDT', 'PNUTUSDT', 'ADAUSDT', 'VIRTUALUSDT', 'LINKUSDT', 'GOATUSDT', 'LTCUSDT', '1000BONKUSDT', 'AVAXUSDT', 'HYPEUSDT', 'POPCATUSDT', 'ENAUSDT', 'BNBUSDT', 'NEARUSDT', 'KAITOUSDT', 'WLDUSDT', 'SOLAYERUSDT', 'ONDOUSDT', 'AAVEUSDT', 'EOSUSDT', 'TIAUSDT', 'MUBARAKUSDT', 'AI16ZUSDT', 'PENGUUSDT', 'SHIB1000USDT', 'PYTHUSDT', 'MEMEFIUSDT', 'ARBUSDT', 'DOTUSDT', 'UNIUSDT', 'KOMAUSDT', 'PEOPLEUSDT', '1000NEIROCTOUSDT', 'OPUSDT', 'CRVUSDT', 'HBARUSDT', 'TAOUSDT', 'SEIUSDT', 'BCHUSDT', 'GALAUSDT', 'ALCHUSDT', 'JUPUSDT', 'CHILLGUYUSDT', '1000CATUSDT', 'ORDIUSDT', 'BERAUSDT', 'TONUSDT', '1000FLOKIUSDT', 'GORKUSDT', 'INITUSDT', 'TRXUSDT', 'DOGSUSDT', 'SUNDOGUSDT', 'HIPPOUSDT', 'BRETTUSDT', 'ACTUSDT', 'AIXBTUSDT', 'ARCUSDT', 'ZEREBROUSDT', 'INJUSDT', 'APTUSDT', 'ATOMUSDT', 'LDOUSDT', 'STXUSDT', 'BOMEUSDT', 'ENSUSDT', 'ETCUSDT', 'MOVEUSDT', 'SANDUSDT', 'VINEUSDT', 'MEWUSDT', 'JELLYJELLYUSDT', 'AUCTIONUSDT', 'SUSDT', 'DOODUSDT', '1000TURBOUSDT', 'ZROUSDT', 'RENDERUSDT', 'OMUSDT', 'XLMUSDT', 'EIGENUSDT', 'NEIROETHUSDT', 'MEMEUSDT', 'HIFIUSDT', 'TSTBSCUSDT', 'HAEDALUSDT', '1000000MOGUSDT', 'FWOGUSDT', 'GRIFFAINUSDT', 'ETHFIUSDT']
     interval = '60' # 1,3,5,15,30,60,120,240,360,720,D,M,W
-    folder_name = '20-24_data'
+    folder_name = '2023_data_100_symbols'
 
     for symbol in symbols:
         print(f"\nProcessing {symbol}...")
